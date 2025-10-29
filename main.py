@@ -34,4 +34,37 @@ def showoutput():
             
         return render_template("shw.html",Result = A)
     
-app.run()
+    elif request.method == "POST":
+        ## Ok - it's working with POST method also
+        # Glucose       =  eval(request.form.get('Glucose'))
+        # BloodPressure = eval(request.form.get('BloodPressure'))
+        # SkinThickness = eval(request.form.get('SkinThickness'))
+        # Insulin       = eval(request.form.get('Insulin'))
+        # BMI           = eval(request.form.get('BMI'))   
+        # DiabetesPedigreeFunction = eval(request.form.get('DiabetesPedigreeFunction'))
+        # Age           = eval(request.form.get('Age'))
+        
+        ### or 
+        Glucose = float(request.form['Glucose'])
+        BloodPressure = float(request.form['BloodPressure'])
+        SkinThickness = float(request.form['SkinThickness'])
+        Insulin = float(request.form['Insulin'])
+        BMI = float(request.form['BMI'])
+        DiabetesPedigreeFunction = float(request.form['DiabetesPedigreeFunction'])
+        Age = float(request.form['Age'])
+
+        obj = DaibeticPred_class(Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age)
+
+        Result = obj.predict_output()
+        
+        #Tip : *** no need to again check Result value bcaz it's already handled in utils.py file - it return actual string.
+        # if Result[0] == 0:     
+        #     A = "Petian is diabetic"
+        # else:
+        #     A = "Petian is Not diabetic"
+        # print("Result is **********",Result)
+            
+        # return render_template("shw.html",Result = A)
+        return render_template("shw.html",Result = Result)
+
+app.run(debug=True)

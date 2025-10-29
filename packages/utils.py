@@ -42,14 +42,17 @@ class DaibeticPred_class():
         
         print("final output is-------",predict)
         
-        if predict == 1 :
-            A = "petiant is not diabetic"
+        # if predict[0] == 1 :                      # because predict return array
+        #     A = "petiant is not diabetic********"
             
-        else:
-            A = "petiant is non diabetics***************"
-        
-        return A
-        
+        # else:
+        #     A = "petiant is diabetics***************"
+            
+
+
+        return ["petiant is not diabetic********", "petiant is diabetics***************"][predict[0]]
+
+
 Glucose = 107.000
 BloodPressure = 50.000
 SkinThickness = 35.000
